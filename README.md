@@ -17,9 +17,12 @@ Check out https://github.com/felixnie/EchoProber for the client app for Android.
 ## To-do
 
 1. (Pending) Parallel processing for analysis tasks.
+2. (Pending) Deal with the lagging when the collected data array is large.
 
 ## Notes
 
 This server runs in the background. 
 One can run other scripts to communicate with clients once the server is set up. 
 The MATLAB live scripts are some examples for remote control and data collection.
+
+Before restarting the server, please disconnect all the clients and check the host IP and ports.
