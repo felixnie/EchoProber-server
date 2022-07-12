@@ -16,16 +16,12 @@ Check out https://github.com/felixnie/EchoProber for the client app for Android.
 5. Remote control on clients: short message as commands, long message as chirp data.
 
 
-## Notes
-
-This server runs in the background. 
-One can run other scripts to communicate with clients once the server is set up. 
-The MATLAB live scripts are some examples for remote control and data collection.
-
-
 ## For Developers
 
-For more details, please find out at https://github.com/felixnie/EchoProber.
+1. This server runs in the background.
+2. One can run other scripts to communicate with clients once the server is set up.
+3. The MATLAB live scripts are some examples for remote control and data collection.
+4. For more details, please find out at https://github.com/felixnie/EchoProber.
 
 
 ## To-do
