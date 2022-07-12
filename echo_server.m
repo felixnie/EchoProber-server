@@ -325,14 +325,12 @@ function readData(src,~)
         n_window = 96;
         n_overlap = 48;
         n_fft = 96;
-
         [ss,ff,tt] = stft(chunk_echo, fs, 'Window', tukeywin(n_window,0.25), ...
             'OverlapLength', n_overlap, 'FFTLength', n_fft, 'FrequencyRange', 'onesided');
-        f0 = 15000;
-        f1 = 20000;
         
         % to capture the frequency interval f0~f1
-        % this is the same as in the Python version, should be modified
+        f0 = 15000;
+        f1 = 20000;
         segment = (fs/2) / n_overlap;
         lower_f = int8(f0/segment) - 1;
         upper_f = int8(f1/segment);
@@ -372,7 +370,7 @@ function readData(src,~)
         chunk_echo = chunk_plot(550:2920-1);
 
         n_window = 256;
-        n_overlap = 15/16 * n_window;
+        n_overlap = 63/64 * n_window;
         n_fft = n_window * 8;
 
         [ss,ff,tt] = stft(chunk_echo, fs, 'Window', tukeywin(n_window,0.25), ...
@@ -395,7 +393,7 @@ function readData(src,~)
             h{idx}{plt_idx} = imagesc((tt+550/44100) * 170, ff(ff>f0 & ff<f1) / 1000, I); % distance as x-axis
             xlabel('distance / m'); ylabel('frequency / kHz');
     
-            % h{idx}{plt_idx} = imagesc(tt * 1000, ff / 1000, I); % time as x-axis
+            % h{idx}{plt_idx} = imagesc(tt * 1000, ff(ff>f0 & ff<f1) / 1000, I); % time as x-axis
             % xlabel('time / ms'); ylabel('frequency / kHz');
             
             resolution = [num2str(size(ss,1)), 'x', num2str(size(ss,2))];
@@ -414,7 +412,7 @@ function readData(src,~)
         chunk_echo = chunk_plot(550:2920-1);
 
         n_window = 256;
-        n_overlap = 15/16 * n_window;
+        n_overlap = 63/64 * n_window;
         n_fft = n_window * 8;
 
         [ss,ff,tt] = stft(chunk_chirp, fs, 'Window', tukeywin(n_window,0.25), ...
@@ -437,7 +435,7 @@ function readData(src,~)
             % h{idx}{plt_idx} = imagesc(tt * 170, ff(ff>f0 & ff<f1) / 1000, I); % distance as x-axis
             % xlabel('distance / m'); ylabel('frequency / kHz');
     
-            h{idx}{plt_idx} = imagesc(tt * 1000, ff / 1000, I); % time as x-axis
+            h{idx}{plt_idx} = imagesc(tt * 1000, ff(ff>f0 & ff<f1) / 1000, I); % time as x-axis
             xlabel('time / ms'); ylabel('frequency / kHz');
             
             resolution = [num2str(size(ss,1)), 'x', num2str(size(ss,2))];
@@ -447,7 +445,7 @@ function readData(src,~)
         end
         set(h{idx}{plt_idx}, 'CData', I);
     end
-    
+
     %% 2.2 spectrogram (echo part, 12x48)
     % spectrogram includes STFT, but with more options, resolution: 12x48
     % this is just to validate that the result is the same as 2.1
